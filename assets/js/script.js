@@ -1,7 +1,7 @@
 // Contains the moment times from 9AM to 5PM
 var times = [];
-var timeBlocksEl = document.getElementById("timeBlocks");
-var currentDayEl = document.getElementById("currentDay");
+var timeBlocksEl = $("#timeBlocks");
+var currentDayEl = $("#currentDay");
 
 function initTime() {
     // Loops from 9am to 5pm
@@ -13,7 +13,7 @@ function initTime() {
 function initCurrentDay() {
     var currentDay = moment().format("dddd, MMMM DD");
     
-    currentDayEl.textContent = currentDay;
+    currentDayEl.text(currentDay);
 }
 
 function initTimeblocks() {
@@ -24,12 +24,14 @@ function initTimeblocks() {
     for (var t = 0; t < times.length; t++) {
         var time = times[t];
         
-        var timeBlockEl = document.createElement("div");
-        timeBlockEl.className = "row time-block";
+        // ------------------- Create the row element for each time block. This is the root item
+        var timeBlockEl = $("<div>");
+        timeBlockEl.addClass("row time-block");
         
-        var timeEl = document.createElement("div");
-        timeEl.className = "hour";
-        timeEl.textContent = time.format("hh A");
+        // ------------------- The hour element of the time block
+        var timeEl = $("<div>");
+        timeEl.addClass("hour");
+        timeEl.text(time.format("hh A"));
         
         // Check if current date is before or after the time block date
         if (currentTime.hour() > time.hour()) {
@@ -42,19 +44,43 @@ function initTimeblocks() {
             timeBlockColour = "future";
         }
         
-        var descriptionEl = document.createElement("textArea");
-        descriptionEl.className = timeBlockColour;
+        // ------------------- The description element of the time block
+        var descriptionEl = $("<textArea>");
+        descriptionEl.attr("id", "desc-" + time.format("DD-MM-YYYY--hhA"));
+        descriptionEl.addClass(timeBlockColour + " description");
         
-        var saveEl = document.createElement("div");
-        saveEl.className = "btn saveBtn";
+        // ------------------- The save button element of the time block
+        var saveEl = $("<button>");
+        saveEl.addClass("btn saveBtn");
         
-        var iconEl = document.createElement("i");
-        iconEl.className = "fa fa-save";
+        var iconEl = $("<i>");
+        iconEl.attr("id", time.format("DD-MM-YYYY--hhA"));
+        iconEl.addClass("fa fa-save");
         
-        saveEl.appendChild(iconEl);
+        // Add click event to the save button
+        saveEl.on("click", saveDescription);
+        
+        // Add any saved data to the description
+        var savedDescription = localStorage.getItem(iconEl.attr("id"));
+        
+        if (savedDescription !== null) {
+            descriptionEl.text(savedDescription);
+        }
+        
+        // Append all the elements to form the time block
+        saveEl.append(iconEl);
         timeBlockEl.append(timeEl, descriptionEl, saveEl);
-        timeBlocksEl.appendChild(timeBlockEl);
+        timeBlocksEl.append(timeBlockEl);
     }
+}
+
+function saveDescription(event) {
+    var buttonEl = event.target;
+    var id = buttonEl.id;
+    var a = $("#desc-" + id);
+    var text = $("#desc-" + id).val();
+    
+    localStorage.setItem(id, text);
 }
 
 initCurrentDay();
