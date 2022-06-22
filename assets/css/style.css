@@ -11,6 +11,7 @@ body {
     color: #000000;
     border-left: 1px solid black;
     padding: 10px;
+    flex-grow: 1;
   }
   
   .jumbotron {
@@ -40,24 +41,23 @@ body {
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
+    padding: 28px 10px 0 25px;
   }
   
   .past {
     background-color: #d3d3d3;
-    color: white;
   }
   
   .present {
     background-color: #ff6961;
-    color: white;
   }
   
   .future {
     background-color: #77dd77;
-    color: white;
   }
   
   .saveBtn {
+    padding: 0;
     border-left: 1px solid black;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -70,3 +70,11 @@ body {
     transition: all 0.3s ease-in-out;
   }
   
+  .saveBtn i {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
