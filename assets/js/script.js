@@ -4,7 +4,7 @@ var timeBlocksEl = $("#timeBlocks");
 var currentDayEl = $("#currentDay");
 
 function initTime() {
-    // Loops from 9am to 5pm
+    // Loops from 9am to 5pm - 24 hour clock
     for (var t = 9; t <= 17; t++) {
         times.push(moment().set("hour", t).set("minute", 0).set("second", 0));
     }
