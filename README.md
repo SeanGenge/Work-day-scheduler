@@ -2,7 +2,7 @@
   
 
 ## Description
-Schedule your working day by typing in the alloted time slots and save each hour for each day. Each hour is colour coded. Grey being past hours, red is the current hour and green is the future hours. The app is deployed at https://seangenge.github.io/Work-day-scheduler/
+Schedule your working day by typing in the allotted time slots and save each hour for each day. Each hour is colour coded. Grey being past hours, red is the current hour and green is the future hours. The app is deployed at https://seangenge.github.io/Work-day-scheduler/
 
 ## Table of Contents
 - [Installation](#installation)
